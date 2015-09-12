@@ -6,7 +6,14 @@ import (
   "time"
   "fmt"
 )
+var ticketId = 0
 var gTickets = Tickets{
+
+}
+func init(){
+  if err := initTickets(); err != nil {
+    panic(err)
+  }
 
 }
 func initTickets() error {
@@ -23,9 +30,14 @@ func initTickets() error {
   if err != nil {
 		return err
 	}
-  gTickets = make(Tickets, len(rawCSVdata))
-  for _, record := range(rawCSVdata){
+  gTickets = make(Tickets, len(rawCSVdata) - 1)
+  for i, record := range(rawCSVdata){
+    if i == 0 {
+      continue
+    }
     var tempTicket = Ticket{}
+    tempTicket.Id = ticketId
+    ticketId += 1
     if tempTicket.CitationNumber,err  = strconv.Atoi(record[1]); err != nil{
       return fmt.Errorf("Failed to read citation number: %v", err)
     }

@@ -4,7 +4,6 @@ import "fmt"
 
 var currentId int
 var courts Courts
-var tickets Tickets
 
 // Give us some seed data
 func init() {
@@ -62,7 +61,7 @@ func RepoDeleteCourt(id int) error{
 //Repo Ticket
 func RepoFindTicket(id int) Ticket{
   //range on an array index, object
-  for _, t := range tickets{
+  for _, t := range gTickets{
     if t.Id == id{
       return t
     }
@@ -76,9 +75,9 @@ func RepoUpdateTicket(new_ticket *Ticket, id int) error{
 	if err := new_ticket.Validate(); err != nil{
 		return fmt.Errorf("Bad ticket: %v", err.Error())
 	}
-  for i, t := range tickets{
+  for i, t := range gTickets{
     if t.Id == id{
-      tickets[i] = *new_ticket
+      gTickets[i] = *new_ticket
 			return nil
     }
   }
@@ -93,14 +92,14 @@ func RepoCreateTicket(t Ticket) (Ticket, error){
 		currentId -= 1
 		return Ticket{}, fmt.Errorf("Bad ticket: %v", err.Error())
 	}
-  tickets = append(tickets, t)
+  gTickets = append(gTickets, t)
   return t, nil
 }
 
 func RepoDeleteTicket(id int) error{
-  for i, t := range tickets{
+  for i, t := range gTickets{
     if t.Id == id{
-      tickets = append(tickets[:i], tickets[i+1:]...)
+      gTickets = append(gTickets[:i], gTickets[i+1:]...)
       return nil
     }
   }
