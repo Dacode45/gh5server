@@ -1,11 +1,5 @@
 package main
 
-type Court struct {
-	Id           int
-	Address      string
-	Municipality string
-
-
 import (
   "fmt"
 )
