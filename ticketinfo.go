@@ -1,5 +1,5 @@
 package main
-
+/*
 var gTicketInfos = TicketInfos{ //same as var ticketInfos = []TicketInfo{
 
   //MOVING TRAFFIC VIOLATION SCHEDULE
@@ -218,3 +218,4 @@ func init(){
     t.Id = i
   }
 }
+*/
