@@ -18,14 +18,13 @@ var routes = Routes{
 		"/",
 		Index,
 	},
-
   Route{
     "CourtIndex",
     "GET",
     "/courts",
     CourtIndex,
   },
-  Route{
+	Route{
     //TODO: Add security so only authorized useser can create a court otherwise return htp status 500
     "CourtCreate",
     "POST",
@@ -52,22 +51,23 @@ var routes = Routes{
     CourtShow,
   },
 
+	//need work on following routes of ticket
 	Route{
-		"TodoIndex",
+		"TicketIndex",
 		"GET",
-		"/todos",
-		TodoIndex,
+		"/tickets/",
 	},
 	Route{
-		"TodoCreate",
-		"POST",
-		"/todos",
-		TodoCreate,
+		"TicketShow",
+		"GET",
+		"/ticket/{ticketId}",
+	}
+	Route{
+		"TicketCreate",
+		"CREATE",
+		"/ticket/{}"
 	},
 	Route{
-		"TodoShow",
-		"GET",
-		"/todos/{todoId}",
-		TodoShow,
+
 	},
 }

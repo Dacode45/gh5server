@@ -1,12 +1,9 @@
 package main
 
-
-
 type Court struct{
   Id int
   Address string
   Municipality string
-
   PhoneNumber string
   OpenTimes string
   Description string
