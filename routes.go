@@ -19,55 +19,36 @@ var routes = Routes{
 		Index,
 	},
 
-  Route{
-    "CourtIndex",
-    "GET",
-    "/courts",
-    CourtIndex,
-  },
-  Route{
-    //TODO: Add security so only authorized useser can create a court otherwise return htp status 500
-    "CourtCreate",
-    "POST",
-    "/courts",
-    CourtCreate,
-  },
-  Route{
-    "CourtUpdate",
-    "PUT",
-    "/courts/{courtId}",
-    CourtUpdate,
-  },
-  Route{
-    //TODO: Add securty so only authorized users can delete a court otherwise return http status 500
-    "CourtDelete",
-    "DELETE",
-    "/courts/{courtId}",
-    CourtDelete,
-  },
-  Route{
-    "CourtShow",
-    "GET",
-    "/courts/{courtId}",
-    CourtShow,
-  },
-
 	Route{
-		"TodoIndex",
+		"CourtIndex",
 		"GET",
-		"/todos",
-		TodoIndex,
+		"/courts",
+		CourtIndex,
 	},
 	Route{
-		"TodoCreate",
+		//TODO: Add security so only authorized useser can create a court otherwise return htp status 500
+		"CourtCreate",
 		"POST",
-		"/todos",
-		TodoCreate,
+		"/courts",
+		CourtCreate,
 	},
 	Route{
-		"TodoShow",
+		"CourtUpdate",
+		"PUT",
+		"/courts/{courtId}",
+		CourtUpdate,
+	},
+	Route{
+		//TODO: Add securty so only authorized users can delete a court otherwise return http status 500
+		"CourtDelete",
+		"DELETE",
+		"/courts/{courtId}",
+		CourtDelete,
+	},
+	Route{
+		"CourtShow",
 		"GET",
-		"/todos/{todoId}",
-		TodoShow,
+		"/courts/{courtId}",
+		CourtShow,
 	},
 }
