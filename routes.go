@@ -80,12 +80,11 @@ var routes = Routes{
 	},
 
 //need work on TicketShow
-	/*
 	Route{
 		"TicketShow",
 		"GET",
 		"/tickets/{ticketId}",
-	},
-	*/
+		TicketShow,
+	}
 
 }
