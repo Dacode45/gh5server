@@ -21,6 +21,8 @@ func RepoFindCourt(id int) Court{
       return c
     }
   }
+  // return empty Court if not found
+  return Court{}
 }
 
 func RepoUpdateCourt(new_court Court, id int) error{

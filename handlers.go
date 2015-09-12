@@ -51,7 +51,7 @@ func CourtCreate(w http.ResponseWriter, r *http.Request){
   c := RepoCreateCourt(court)
   w.Header().Set("Content-Type", "application/json; charset=UTF-8")
   w.WriteHeader(http.StatusCreated)
-  if err := json.NewEncoder(w).Encode(t); err != nil {
+  if err := json.NewEncoder(w).Encode(c); err != nil {
     panic(err)
   }
 
