@@ -7,7 +7,7 @@ import (
 type Court struct{
   Id int                `json:"id"`
   Address string        `json:"address"`
-  Municipality string   `json:"municipality"`
+  Muni Municipality   `json:"municipality"`
   PhoneNumber string    `json:"phone_number"`
   OpenTimes string      `json:"open_times"`
   Description string    `json"description"`
@@ -32,7 +32,7 @@ func (c *Court) Validate () error{
   if len(c.Address) == 0{
     errors = append(errors, ERROR_MISSING_Address)
   }
-  if len(c.Municipality) == 0{
+  if len(c.Muni) == 0{
     errors = append(errors, ERROR_MISSING_Municipality)
   }
   if len(c.PhoneNumber) == 0{

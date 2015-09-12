@@ -4,6 +4,7 @@ type Ticket struct{
   TIs TicketInfos `json:"tis"`
   UserID int `json:"userid"`
   Id int `json:"id"`
+  Muni Municipality `json:"municipality"`
 }
 
 type TicketInfo struct{
