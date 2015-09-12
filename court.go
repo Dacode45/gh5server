@@ -1,15 +1,6 @@
 package main
 
-<<<<<<< HEAD
-type Court struct{
-  Id int
-  Address string
-  Municipality string
-  PhoneNumber string
-  OpenTimes string
-  Description string
-  PaymentTypes []string
-=======
+
 import (
   "fmt"
 )
@@ -70,7 +61,6 @@ func (c *Court) Validate () error{
     return fmt.Errorf("Missing the follwing field(s): %v", errors)
   }
 
->>>>>>> origin/master
 }
 
 // func (c *Court) String() string{
