@@ -3,9 +3,7 @@ package main
 import "fmt"
 
 var currentId int
-
 var courts Courts
-var todos Todos
 
 // Give us some seed data
 func init() {
