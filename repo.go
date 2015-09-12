@@ -4,6 +4,7 @@ import "fmt"
 
 var currentId int
 var courts Courts
+var tickets Tickets
 
 // Give us some seed data
 func init() {
