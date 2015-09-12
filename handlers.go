@@ -262,8 +262,7 @@ func TicketDelete(w http.ResponseWriter, r *http.Request){
 	}
 }
 
-//need impletion of TicketShow
-/*
+
 func TicketShow(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var ticketId int
@@ -290,7 +289,7 @@ func TicketShow(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 }
-*/
+
 
 /*
 Example of JSON data structure
