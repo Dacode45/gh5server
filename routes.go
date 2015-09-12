@@ -78,5 +78,5 @@ var routes = Routes{
 		"TicketShow",
 		"GET",
 		"/tickets/{ticketId}",
-	}
+	},
 }
