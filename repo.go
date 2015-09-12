@@ -23,21 +23,30 @@ func RepoFindCourt(id int) Court{
   return Court{}
 }
 
-func RepoUpdateCourt(new_court Court, id int) error{
+func RepoUpdateCourt(new_court *Court, id int) error{
   new_court.Id = id
-  for _, c := range courts{
+	if err := new_court.Validate(); err != nil{
+		return fmt.Errorf("Bad court: %v", err.Error())
+	}
+  for i, c := range courts{
     if c.Id == id{
-      c = new_court
+      courts[i] = *new_court
+			return nil
     }
   }
   return fmt.Errorf("Could not find a Court with id of %v to update", id)
 }
 
-func RepoCreateCourt(c Court) Court{
+func RepoCreateCourt(c Court) (Court, error){
   currentId += 1
   c.Id = currentId
+	//Caution: Possibility of data racing.
+	if err := c.Validate(); err != nil{
+		currentId -= 1
+		return Court{}, fmt.Errorf("Bad court: %v", err.Error())
+	}
   courts = append(courts, c)
-  return c
+  return c, nil
 }
 
 func RepoDeleteCourt(id int) error{
@@ -48,32 +57,4 @@ func RepoDeleteCourt(id int) error{
     }
   }
   return fmt.Errorf("Could not find a Court with id of %v to delete", id)
-}
-
-func RepoFindTodo(id int) Todo {
-	for _, t := range todos {
-		if t.Id == id {
-			return t
-		}
-	}
-	// return empty Todo if not found
-	return Todo{}
-}
-
-//this is bad, I don't think it passes race condtions
-func RepoCreateTodo(t Todo) Todo {
-	currentId += 1
-	t.Id = currentId
-	todos = append(todos, t)
-	return t
-}
-
-func RepoDestroyTodo(id int) error {
-	for i, t := range todos {
-		if t.Id == id {
-			todos = append(todos[:i], todos[i+1:]...)
-			return nil
-		}
-	}
-	return fmt.Errorf("Could not find Todo with id of %d to delete", id)
 }
