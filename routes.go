@@ -58,25 +58,33 @@ var routes = Routes{
 		"TicketIndex",
 		"GET",
 		"/tickets",
+		TicketIndex,
 	},
 	Route{
 		"TicketCreate",
 		"CREATE",
 		"/tickets",
+		TicketCreate,
 	},
 	Route{
 		"TicketUpdate",
 		"UPDATE",
 		"/tickets/{ticketId}",
+		TicketUpdate,
 	},
 	Route{
 		"TicketDelete",
 		"DELETE",
 		"/tickets/{ticketId}",
-	}
+		TicketDelete,
+	},
+	
+	//need work on TicketShow
+	/*
 	Route{
 		"TicketShow",
 		"GET",
 		"/tickets/{ticketId}",
-	}
+	},
+	*/
 }

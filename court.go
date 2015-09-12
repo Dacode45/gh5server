@@ -32,7 +32,7 @@ func (c *Court) Validate () error{
   if len(c.Address) == 0{
     errors = append(errors, ERROR_MISSING_Address)
   }
-  if len(c.Muni) == 0{
+  if c.Muni.Id > 0{
     errors = append(errors, ERROR_MISSING_Municipality)
   }
   if len(c.PhoneNumber) == 0{
