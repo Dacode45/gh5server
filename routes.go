@@ -51,7 +51,7 @@ var routes = Routes{
     CourtShow,
   },
 	//need work on following routes of ticket
-	Route{
+	/*Route{
 		"TicketIndex",
 		"GET",
 		"/tickets/",
@@ -64,9 +64,9 @@ var routes = Routes{
 	Route{
 		"TicketCreate",
 		"CREATE",
-		"/ticket/{}"
+		"/ticket/{}",
 	},
 	Route{
 
-	},
+	},*/
 }

@@ -15,20 +15,15 @@ type TicketInfo struct{
 }
 
 //if TicketInfo exists, update it; else, append it.
-func (t *Ticket) addCitation(ti TicketInfo){
-  haveTicketInfo bool = false
+func (t *Ticket) addCitation(ti TicketInfo) TicketInfos{
   for index, i := range t.TIs{
     if i.Id == ti.Id{
-      haveTicketInfo = true
+      t.TIs[index] = ti
+      return t.TIs
     }
   }
-  if haveTicketInfo == true{
-    t.TIs[index] = ti
-    return t.TIs
-  }else{
-    t.TIs = append(t.TIs, ti)
-    return t.TIs
-  }
+  t.TIs = append(t.TIs, ti)
+  return t.TIs
 }
 
 // func (t *Ticket) String() string{
