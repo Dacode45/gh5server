@@ -73,7 +73,7 @@ var routes = Routes{
 		"TicketDelete",
 		"DELETE",
 		"/tickets/{ticketId}",
-	}
+	},
 	Route{
 		"TicketShow",
 		"GET",
