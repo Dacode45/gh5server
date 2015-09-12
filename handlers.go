@@ -96,7 +96,7 @@ func CourtUpdate(w http.ResponseWriter, r *http.Request){
 
   w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusCreated) // TODO: Use Right status code
-	if err := json.NewEncoder(w).Encode(c); err != nil {
+	if err := json.NewEncoder(w).Encode(court); err != nil {
 		panic(err)
 	}
 

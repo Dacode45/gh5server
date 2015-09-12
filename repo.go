@@ -9,9 +9,7 @@ var todos Todos
 
 // Give us some seed data
 func init() {
-	RepoCreateTodo(Todo{Name: "Write presentation"})
-	RepoCreateTodo(Todo{Name: "Host meetup"})
-  RepoCreateCourt(Court{})
+	  RepoCreateCourt(Court{})
 }
 
 func RepoFindCourt(id int) Court{
