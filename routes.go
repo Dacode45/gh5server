@@ -19,6 +19,7 @@ var routes = Routes{
 		Index,
 	},
 
+	//Route of Court
   Route{
     "CourtIndex",
     "GET",
@@ -51,24 +52,31 @@ var routes = Routes{
     "/courts/{courtId}",
     CourtShow,
   },
-	//need work on following routes of ticket
-	/*Route{
+
+	//Route of Ticket
+	Route{
 		"TicketIndex",
 		"GET",
-		"/tickets/",
+		"/tickets",
 	},
+	Route{
+		"TicketCreate",
+		"CREATE",
+		"/tickets",
+	},
+	Route{
+		"TicketUpdate",
+		"UPDATE",
+		"/ticket/{ticketId}",
+	},
+	Route{
+		"TicketDelete",
+		"DELETE",
+		"/ticket/{ticketId}",
+	}
 	Route{
 		"TicketShow",
 		"GET",
 		"/ticket/{ticketId}",
 	}
-	Route{
-		"TicketCreate",
-		"CREATE",
-		"/ticket/{}",
-
-	},
-	Route{
-
-	},*/
 }
