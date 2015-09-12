@@ -18,40 +18,7 @@ var routes = Routes{
 		"/",
 		Index,
 	},
-<<<<<<< HEAD
 
-	Route{
-		"CourtIndex",
-		"GET",
-		"/courts",
-		CourtIndex,
-	},
-	Route{
-		//TODO: Add security so only authorized useser can create a court otherwise return htp status 500
-		"CourtCreate",
-		"POST",
-		"/courts",
-		CourtCreate,
-	},
-	Route{
-		"CourtUpdate",
-		"PUT",
-		"/courts/{courtId}",
-		CourtUpdate,
-	},
-	Route{
-		//TODO: Add securty so only authorized users can delete a court otherwise return http status 500
-		"CourtDelete",
-		"DELETE",
-		"/courts/{courtId}",
-		CourtDelete,
-	},
-	Route{
-		"CourtShow",
-		"GET",
-		"/courts/{courtId}",
-		CourtShow,
-=======
   Route{
     "CourtIndex",
     "GET",
@@ -99,7 +66,7 @@ var routes = Routes{
 		"TicketCreate",
 		"CREATE",
 		"/ticket/{}",
->>>>>>> origin/master
+
 	},
 	Route{
 
