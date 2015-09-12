@@ -26,6 +26,7 @@ func CourtIndex(w http.ResponseWriter, r *http.Request){
 func CourtCreate(w http.ResponseWriter, r *http.Request){
 
   var court Court
+	var err error
   //Check if malicious user is trying to overload the server
   body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
   if err != nil{
@@ -41,11 +42,16 @@ func CourtCreate(w http.ResponseWriter, r *http.Request){
 			panic(err)
 		}
   }
-
-  c := RepoCreateCourt(court)
+  if court, err = RepoCreateCourt(court); err != nil {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(422) // unprocessable entity
+		if err := json.NewEncoder(w).Encode(err); err != nil {
+			panic(err)
+		}
+	}
   w.Header().Set("Content-Type", "application/json; charset=UTF-8")
   w.WriteHeader(http.StatusCreated)
-  if err := json.NewEncoder(w).Encode(c); err != nil {
+  if err := json.NewEncoder(w).Encode(court); err != nil {
     panic(err)
   }
 
@@ -78,16 +84,15 @@ func CourtUpdate(w http.ResponseWriter, r *http.Request){
 		}
   }
 
-  if err := RepoUpdateCourt(court, courtId); err != nil{
+  if err := RepoUpdateCourt(&court, courtId); err != nil{
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
     w.WriteHeader(http.StatusNotFound) //TODO: Use right status code
     if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
       panic(err)
     }
   }
-
   w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusCreated) // TODO: Use right status code
+	w.WriteHeader(http.StatusOK) // TODO: Use right status code
 	if err := json.NewEncoder(w).Encode(court); err != nil {
 		panic(err)
 	}
@@ -95,6 +100,27 @@ func CourtUpdate(w http.ResponseWriter, r *http.Request){
 }
 
 func CourtDelete(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
+  var courtId int
+  var err error
+
+  if courtId, err = strconv.Atoi(vars["courtId"]); err != nil{
+    panic(err)
+  }
+
+	if err := RepoDeleteCourt(courtId); err!= nil {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+    w.WriteHeader(http.StatusNotFound) //TODO: Use right status code
+    if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
+      panic(err)
+    }
+	} else {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+    w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusOK, Text: "Item Deleted"}); err != nil {
+      panic(err)
+    }
+	}
 
 }
 

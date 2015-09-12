@@ -51,6 +51,7 @@ var routes = Routes{
     CourtShow,
   },
 
+<<<<<<< HEAD
 	//need work on following routes of ticket
 	Route{
 		"TicketIndex",
@@ -70,4 +71,6 @@ var routes = Routes{
 	Route{
 
 	},
+=======
+>>>>>>> origin/master
 }
