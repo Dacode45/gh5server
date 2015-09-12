@@ -17,4 +17,4 @@ type Court struct{
 //
 // }
 
-type Courts []Courts
+type Courts []Court
