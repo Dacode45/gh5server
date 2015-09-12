@@ -67,16 +67,16 @@ var routes = Routes{
 	Route{
 		"TicketUpdate",
 		"UPDATE",
-		"/ticket/{ticketId}",
+		"/tickets/{ticketId}",
 	},
 	Route{
 		"TicketDelete",
 		"DELETE",
-		"/ticket/{ticketId}",
+		"/tickets/{ticketId}",
 	}
 	Route{
 		"TicketShow",
 		"GET",
-		"/ticket/{ticketId}",
+		"/tickets/{ticketId}",
 	}
 }
