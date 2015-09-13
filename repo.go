@@ -38,21 +38,21 @@ func GetCourtByAddress(lat, lon float64) (Court){
 
 	cmd := exec.Command("python", "court_locator.py", strconv.FormatFloat(lat, 'f', 6, 64), strconv.FormatFloat(lon, 'f', 6, 64))
 	out, err := cmd.Output()
-	fmt.Printf("%d, %d", lat, lon)
+	//fmt.Printf("%d, %d", lat, lon)
 	if err != nil{
 		fmt.Printf("Could Not Run Python Script, err: %v", err)
 		return Court{}
 	}
 
 	cPython := Court{}
-	log.Printf("Court @ %s", out)
+	//log.Printf("Court @ %s", out)
 	outArr := strings.Split(string(out), ":^)")
 	if err = json.Unmarshal([]byte(outArr[1]), &cPython); err == nil {
 	}
 	if cPython.CourtId != 0{
 		cPython.Initialized = true
 	}
-	fmt.Printf("%v", cPython)
+	//fmt.Printf("%v", cPython)
 	return cPython
 }
 
@@ -79,9 +79,11 @@ func RepoFindCourtByAddress(lat, lon float64) Court{
 	}
 	matched = false
 	for _, muni := range gMunicipalities {
-		if BareBones(muni.Name) == BareBones(cPython.City) {
+		//fmt.Printf("%v vs %v = %v\n",BareBones(muni.Name),BareBones(cPython.City), strings.EqualFold(BareBones(muni.Name), BareBones(cPython.City)))
+		if strings.EqualFold(BareBones(muni.Name), BareBones(cPython.City)) == true {
 			matched = true
 			cPython.Muni = &muni
+			break
 		}
 	}
 	if (!matched){
@@ -92,6 +94,7 @@ func RepoFindCourtByAddress(lat, lon float64) Court{
 		cPython.Muni = &gMunicipalities[mid]
 	}
 
+	log.Printf("Got Court\n")
 	return cPython
 
 }
@@ -99,7 +102,7 @@ func RepoFindCourtByAddress(lat, lon float64) Court{
 func RepoFindTicketByDriverLicenseNumber(driver_license_number string) Ticket{
 	//TODO: Handlers should really get things from global arrays. Create a function in repo.go that returns a ticket from drivers license
 	for _, tic := range gTickets {
-		if tic.DriverLicenseNumber == driver_license_number {
+		if strings.EqualFold(tic.DriverLicenseNumber, driver_license_number) {
 				return tic
 		}
 	}
