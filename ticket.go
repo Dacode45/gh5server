@@ -35,7 +35,7 @@ type Ticket struct{
   WarrentStatus bool `json:"warrent_status"`
   WarrentNumber string `json:"warrent_number"`
   Status string `json:"status"`
-  StatusDate time.Time `json:StatusDate`
+  StatusDate time.Time `json:status_date`
   Muni Municipality `json:"municipality"`
   FineAmount string `json:"fine_amount"`
   CourtCost string `json:"court_cost"`

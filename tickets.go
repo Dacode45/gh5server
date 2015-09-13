@@ -8,7 +8,7 @@ import (
   "io/ioutil"
   "encoding/json"
 )
-var ticketId = 1
+var gTicketId = 1
 var gTickets = Tickets{
 
 }

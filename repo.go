@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-var currentId int
+var gCourtId int
 var courts Courts
 
 // Give us some seed data
@@ -33,20 +33,50 @@ func GetMuncipalityByAddress(lat, lon) (Municipality, Court, error){
 
 
 	outArr := strings.Split(out, delim)
-	MunicipalityJSON,
+	return Municipality{}, court{}, nil
 
 
 	//Call Python script
 	//Get Json stuff
 }
 
-func RepoFindMunicipalityByAddress(lat, lon float) Municipality{
+func RepoFindCourtByAddress(lat, lon float) Court{
 	//range on an array index, object
 	mPython, cPython, err := GetMuncipalityByAddress(lat, lon)
+	if err != nil {
+		return Municipality{}
+	}
+	var matched bool = false
+	for i, muni := range gMunicipalities {
+		if muni.Name == mPython.Name {
+			matched = true
+			mPython.Id = muni.Id
+			gMunicipalities[i] = mPython
+		}
+	}
+	if (!matched){
+		mPython.Id = len(gMunicipalities) + 1
+		gMunicipalities = append(gMunicipalities, mPython)
+	}
+	cPython.Municipality = &muni
+	matched = false
+	for i, court := range courts {
+		if court.Address == cPython.Address {
+			matched = true
+			cPython.Id = court.Id
+			courts[i] = cPython
+		}
+	}
+	if (!matched){
+		cPython.Id = len(courts) + 1
+		courts = append(courts, cPython)
+	}
+	return cPython
+
 	//check if this data matches municipality object if it doesn't add municipality to lis,
 	//if it does, update it
 	// return empty Ticket if not found
-	return Municipality{}
+
 }
 
 func RepoFindMunicipality(mId) Municipality{
@@ -76,11 +106,11 @@ func RepoUpdateCourt(new_court *Court, id int) error{
 }
 
 func RepoCreateCourt(c Court) (Court, error){
-  currentId += 1
-  c.Id = currentId
+  gCourtId += 1
+  c.Id = gCourtId
 	//Caution: Possibility of data racing.
 	if err := c.Validate(); err != nil{
-		currentId -= 1
+		gCourtId -= 1
 		return Court{}, fmt.Errorf("Bad court: %v", err.Error())
 	}
   courts = append(courts, c)
@@ -124,11 +154,11 @@ func RepoUpdateTicket(new_ticket *Ticket, id int) error{
 }
 
 func RepoCreateTicket(t Ticket) (Ticket, error){
-  currentId += 1
-  t.Id = currentId
+  gCourtId += 1
+  t.Id = gCourtId
 	//Caution: Possibility of data racing.
 	if err := t.Validate(); err != nil{
-		currentId -= 1
+		gCourtId -= 1
 		return Ticket{}, fmt.Errorf("Bad ticket: %v", err.Error())
 	}
   gTickets = append(gTickets, t)

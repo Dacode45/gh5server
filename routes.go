@@ -99,6 +99,6 @@ var routes = Routes{
 		"GET",
 		"/municipal/{mId}",
 		MunicipalShow,
-	}
+	},
 
 }

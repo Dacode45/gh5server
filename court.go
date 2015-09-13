@@ -7,7 +7,7 @@ import (
 type Court struct{
   Id int                `json:"id"`
   Address string        `json:"address"`
-  Muni Municipality   `json:"municipality"`
+  Muni *Municipality   `json:"municipality"`
   PhoneNumber string    `json:"phone_number"`
   OpenTimes string      `json:"open_times"`
   Description string    `json"description"`
