@@ -5,8 +5,10 @@ import (
   "strconv"
   "time"
   "fmt"
+  "io/ioutil"
+  "encoding/json"
 )
-var ticketId = 0
+var ticketId = 1
 var gTickets = Tickets{
 
 }
@@ -17,20 +19,40 @@ func init(){
 
 }
 func initTickets() error {
+  file, err := os.Open(DATABASE_CACHE_FILE)
+  var cached = false
+  if err == nil {
+    defer file.Close()
+    serilized, err := ioutil.ReadAll(file)
+    if err = json.Unmarshal(serilized, gTickets); err == nil{
+      cached = true
+    }
+  }
+  if !cached{
+    if err = loadViolations(); err != nil {
+      return fmt.Errorf("Error Loading violations.csv: %v", err)
+    }
+    if err = loadCitations(); err != nil {
+      return fmt.Errorf("Error Loading citations.csv: %v", err)
+    }
+  }
+  return nil
+}
+func loadViolations() error {
   var err error
   csvfile, err := os.Open("violations.csv")
 
-	if err != nil {
-		return fmt.Errorf("Failed to Open violations.csv: %v", err.Error())
-	}
+  if err != nil {
+    return fmt.Errorf("Failed to Open violations.csv: %v", err.Error())
+  }
   defer csvfile.Close()
-	reader := csv.NewReader(csvfile)
-	reader.FieldsPerRecord = 10
+  reader := csv.NewReader(csvfile)
+  reader.FieldsPerRecord = 10
   rawCSVdata, err := reader.ReadAll()
   if err != nil {
-		return err
-	}
-  gTickets = make(Tickets, len(rawCSVdata) - 1)
+    return err
+  }
+  gTickets = make(Tickets, len(rawCSVdata))
   for i, record := range(rawCSVdata){
     if i == 0 {
       continue
@@ -85,7 +107,46 @@ func initTickets() error {
     }
     tempTicket.FineAmount = record[8]
     tempTicket.CourtCost = record[9]
-    gTickets = append(gTickets, tempTicket)
+    gTickets[i] = tempTicket
+  }
+  return nil
+}
+func loadCitations() error {
+  var err error
+  csvfile, err := os.Open("citations.csv")
+  if err != nil {
+    return fmt.Errorf("Failed to Open citations.csv: %v", err.Error())
+  }
+  defer csvfile.Close()
+  reader := csv.NewReader(csvfile)
+  reader.FieldsPerRecord = 13
+  rawCSVdata, err := reader.ReadAll()
+  if err != nil {
+    return err
+  }
+  for j, record := range rawCSVdata{
+    if j == 0 {
+      continue
+    }
+    var citation_number int
+    if citation_number,err  = strconv.Atoi(record[1]); err != nil{
+      return fmt.Errorf("Failed to read citation number: %v", err)
+    }
+    for i, previous_record := range gTickets {
+      if previous_record.CitationNumber == citation_number{
+        gTickets[i].CitationDate, err = time.Parse("1/2/2006 15:04", record[2])
+        gTickets[i].FirstName = record[3]
+        gTickets[i].LastName = record[4]
+        gTickets[i].DateOfBirth, err = time.Parse("1/2/2006 15:04", record[5])
+        gTickets[i].DefendantAddress = record[6]
+        gTickets[i].DefendantCity = record[7]
+        gTickets[i].DefendantState = record[8]
+        gTickets[i].DriverLicenseNumber = record[9]
+        gTickets[i].CourtDate, err = time.Parse("1/2/2006 15:04", record[10])
+        gTickets[i].CourtLocation = record[11]
+        gTickets[i].CourtAddress = record[12]
+      }
+    }
   }
   return nil
 }

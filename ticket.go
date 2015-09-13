@@ -39,6 +39,17 @@ type Ticket struct{
   Muni Municipality `json:"municipality"`
   FineAmount string `json:"fine_amount"`
   CourtCost string `json:"court_cost"`
+  CitationDate time.Time `json:"citation_date"`
+  FirstName string `json:"first_name"`
+  LastName string `json:"last_name"`
+  DateOfBirth time.Time `json:date_of_birth`
+  DefendantAddress string `json:defendant_address`
+  DefendantCity string `json:defendant_city`
+  DefendantState string `json:defendant_state`
+  DriverLicenseNumber string `json:driver_license_number`
+  CourtDate time.Time `json:court_date`
+  CourtLocation string `json:court_location`
+  CourtAddress string `json:court_address`
 }
 
 /*type TicketInfo struct{
