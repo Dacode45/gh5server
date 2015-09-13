@@ -22,6 +22,45 @@ func RepoFindCourt(id int) Court{
   return Court{}
 }
 
+func GetMuncipalityByAddress(lat, lon) (Municipality, Court, error){
+
+	cmd := exec.Command("municipal.py")
+	out, err := cmd.Output()
+
+	if err != nil{
+		return Municipality{}, error
+	}
+
+
+	outArr := strings.Split(out, delim)
+	MunicipalityJSON,
+
+
+	//Call Python script
+	//Get Json stuff
+}
+
+func RepoFindMunicipalityByAddress(lat, lon float) Municipality{
+	//range on an array index, object
+	mPython, cPython, err := GetMuncipalityByAddress(lat, lon)
+	//check if this data matches municipality object if it doesn't add municipality to lis,
+	//if it does, update it
+	// return empty Ticket if not found
+	return Municipality{}
+}
+
+func RepoFindMunicipality(mId) Municipality{
+	//range on an array index, object
+  for _, m := range gMunicipalities{
+    if m.Id == id{
+      return m
+    }
+  }
+  // return empty Ticket if not found
+  return Municipality{}
+}
+
+
 func RepoUpdateCourt(new_court *Court, id int) error{
   new_court.Id = id
 	if err := new_court.Validate(); err != nil{

@@ -15,6 +15,62 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Welcome!\n")
 }
 
+//handlers for municipality
+func MunicipalIndex(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	if lat, err :=  strconv.ParseFloat(vars["lat"]); err != nil{
+		panic(err)
+	}
+	if lon, err := strconv.ParseFloat(vars["lon"]); err != nil{
+		panic(err)
+	}
+
+	m := RepoFindMunicipalityByAddress(lat, lon)
+	if m.Id > 0 {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(m); err != nil {
+			panic(err)
+		}
+		return
+	}
+
+	// If we didn't find it, 404
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusNotFound)
+	if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
+		panic(err)
+	}
+}
+
+func MunicipalShow(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	var mId int
+	var err error
+
+	if mId, err = strconv.Atoi(vars["mId"]); err != nil {
+		panic(err)
+	}
+
+	m := RepoFindMunicipality(mId)
+	if m.Id > 0 {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(m); err != nil {
+			panic(err)
+		}
+		return
+	}
+
+	// If we didn't find it, 404
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusNotFound)
+	if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
+		panic(err)
+	}
+}
+
 //handlers for court
 func CourtIndex(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")

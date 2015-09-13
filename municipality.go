@@ -44,6 +44,9 @@ type Municipality struct {
 	MunicipalCodes        string `json:"municipal_codes"`
 	OrderSeen             string `json:"order_seen"`
 	DirectionsListed      bool   `json:"directions_listed"`
+	Initialized bool `json:"initialized"`
+
+	//
 }
 
 type Municipalities []Municipality

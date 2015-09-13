@@ -87,4 +87,18 @@ var routes = Routes{
 		TicketShow,
 	},
 
+	//Municipalities
+	Route{
+		"MunicipalityIndex",
+		"GET",
+		"/municipal/{lat}/{lon}",
+		MunicipalIndex,
+	},
+	Route{
+		"MunicipalityShow",
+		"GET",
+		"/municipal/{mId}",
+		MunicipalShow,
+	}
+
 }
