@@ -82,7 +82,7 @@ def point_is_in_multipoly(x, y, multipoly):
 
     # We simply iterate through the array, and return true if any are true, and false if all are false.
     for poly in multipoly:
-        print("Next poly has", len(poly), "points.")
+        #print("Next poly has", len(poly), "points.")
         if point_is_in_poly(x, y, poly):
             return True
     return False
@@ -104,7 +104,7 @@ def muniForPoint(x, y):
     for muni in munis:
         # Before we can iterate, we must know what type of polygon we're dealing with.
         muni_geometry = muni["geometry"]
-        print("Checking for match in:", muni["properties"]["name"])
+        #print("Checking for match in:", muni["properties"]["name"])
         if muni_geometry["type"] == "Polygon":
             # Geometry is a polygon. Use basic containment algorithm.
             if point_is_in_poly(x, y, muni_geometry["coordinates"]):
@@ -118,7 +118,7 @@ def muniForPoint(x, y):
         else:
             # Log that there was a geometry error, but don't stop iterating immediately;
             # the point could still be in a subsequent municipality and we don't want to miss it.
-            print("ERROR. INVALID GEOMETRY TYPE")
+            # print("ERROR. INVALID GEOMETRY TYPE")
 
     # Return nothing if there's no match.
     return None
@@ -181,7 +181,13 @@ def main():
     # Send to the ostream via print() JSON objects for the municipality and
     # court relevant to the query.
 
-    # Unpack the command-line arguments
+##    FOR TESTING FUNCTIONS ONLY (DISABLE WHEN USING COMAND-LINE ARGS!!!)
+##
+##    print("Enter x, then y!")
+##    x = eval(input())
+##    y = eval(input())
+
+    # Unpack the command-line arguments into lattitude x and longitude y
     x = sys.argv[0]
     y = sys.argv[1]
 
@@ -193,9 +199,6 @@ def main():
 
     # Export the results of the query to the server-side software calling this script via a
     # print() statement
-    if muni != None:
-        print(json.dumps(muni["properties"]) + " :^) " + json.dumps(court))
-    else:
-        # Send an empty JSON object to represent a Null Python object
-        print(" {} " + " :^) " + json.dumps(court))
+    print(json.dumps(court))
+
 main()
