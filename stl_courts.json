@@ -3,14 +3,14 @@
   {
     "court_id":0,
     "city":"St. Louis",
-    "address":"SENTINEL",
+    "address":"MuLtiple Addresses; see website",
     "county":"St. Louis",
     "state":"MO",
     "zip_code":0,
     "x":-360,
     "y":-360,
     "level":"county",
-    "phone":"",
+    "phone":"(314) 615-8760",
     "web":"http://www.stlouisco.com/LawandPublicSafety/MunicipalCourts/LocationsandHours"
   },
   {

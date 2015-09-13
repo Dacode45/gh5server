@@ -12,12 +12,12 @@ import json
 
 # PATHING CONSTANTS (Hardcoded for now)
 # A JSON database of geographic information for all of the municipalities in the county.
-muni_filename = "mo/stl_munis.json"
+muni_filename = "stl_munis.json"
 # A JSON database detailing location and contact information for all courts in the county.
-court_filename = "mo/stl_courts.json"
+court_filename = "stl_courts.json"
 # A JSON database used to map together entries in the prior two databases based-on which courts
 # service which areas.
-service_map_filename = "mo/stl_service_map.json"
+service_map_filename = "stl_service_map.json"
 
 def point_is_in_bounds(x, y, bounds):
     # POINT IS IN BOUNDS
@@ -94,7 +94,7 @@ def muniForPoint(x, y):
     # While this method may return None, the driver and calling functions check for this sentinel condition.
 
     # Load the list of municipal boundaries as JSON objects (each being geometrically either a polygon or a multipolygon).
-    # Save them into an array and iterate over it.   
+    # Save them into an array and iterate over it.
     file = open(muni_filename, 'r')
     muni_json_data = json.loads(file.read())
     file.close()
@@ -112,14 +112,14 @@ def muniForPoint(x, y):
         elif muni_geometry["type"] == "MultiPolygon":
             # Geometry is a multipolygon.
             # Use the iterative containment algorithm over all member polygons.
-            if point_is_in_poly(x, y, muni_geometry["coordinates"]):
+            if point_is_in_multipoly(x, y, muni_geometry["coordinates"]):
                 # Return if we have a match.
                 return muni
         else:
             # Log that there was a geometry error, but don't stop iterating immediately;
             # the point could still be in a subsequent municipality and we don't want to miss it.
             print("ERROR. INVALID GEOMETRY TYPE")
-        
+
     # Return nothing if there's no match.
     return None
 
@@ -129,12 +129,12 @@ def courtForMuni(muni):
     # Input: A municipality, as stored in a JSON object.
     # Output: Either the court presiding over that municipality or (if there is none or there's an unexpected error)
     #         the default option  county courts
-    
+
     file = open(court_filename, 'r')
     court_json_data = json.loads(file.read())
     courts = court_json_data["courts"]
     file.close()
-        
+
     if muni == None or muni["properties"]["muni_id"] == 0:
         # The if-statement above covers a few critical edge cases:
         # 1) The area is unincorporated and under county jurisdiction.
@@ -156,7 +156,7 @@ def courtForMuni(muni):
         service_map_json_data = json.loads(file.read())
         service_mappings = service_map_json_data["service_mappings"]
         file.close()
-        
+
         # Iterate through the list of service mappings to find the
         # court_id servicing the municipality given.
         for s_map in service_mappings:
@@ -199,4 +199,3 @@ def main():
         # Send an empty JSON object to represent a Null Python object
         print(" {} " + " :^) " + json.dumps(court))
 main()
-

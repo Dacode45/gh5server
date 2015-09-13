@@ -31,7 +31,7 @@ func MunicipalIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	m := RepoFindCourtByAddress(lat, lon)
-	if m.Id > 0 {
+	if m.Id >= 0 {
 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 		w.WriteHeader(http.StatusOK)
 		if err := json.NewEncoder(w).Encode(m); err != nil {

@@ -15,15 +15,15 @@ func (m MunicipalCourtEnum) String() string {
 	s := ""
 	switch m {
 	case HAS_MUNICIPAL_COURT:
-		s += "Has a Municipal Court"
+		s += "Municipal Court in City"
 	case NO_MUNICIPAL_COURT:
 		s += "No Municipal Court"
 	case NO_MUNICIPAL_COURT_STLCO:
-		s += "No Municipal Court (stlco)"
+		s += "St. Louis County"
 	case FRONTENAC_MUNICIPAL_COURT:
-		s += "Has a Frontenac Municiapl Court"
+		s += "Frontenac Municiapl Court"
 	case NORMANDY_MUNICIPAL_COURT:
-		s += "Has a Normandy Municiapl Court"
+		s += "Normandy Municiapl Court"
 	}
 	return s
 }
@@ -40,16 +40,12 @@ type Municipality struct {
 	InfoSource            string             `json:"info_source"`
 	OnlinePaymentProvider string             `json:"online_payment_provider"`
 	HasDressCode          bool               `json:"has_dress_code"`
-	FineScheduleListed    bool
+	FineScheduleListed    bool `json:"fine_schedule_listed"`
 	MunicipalCodes        string `json:"municipal_codes"`
 	OrderSeen             string `json:"order_seen"`
 	DirectionsListed      bool   `json:"directions_listed"`
 	Initialized bool `json:"initialized"`
-	//Stuff frmo python
-	OBJECTID int
-	MUNICIPALITY string
-	MUNI string
-	MUNICODE int
+
 
 
 }

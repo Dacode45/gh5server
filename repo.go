@@ -34,32 +34,25 @@ func RepoFindCourt(id int) Court{
 }
 
 //Id of Court and Municipality will be 0
-func GetCourtByAddress(lat, lon float64) (Municipality, Court){
+func GetCourtByAddress(lat, lon float64) (Court){
 
 	cmd := exec.Command("python", "court_locator.py", strconv.FormatFloat(lat, 'g', 1, 64), strconv.FormatFloat(lon, 'g', 1, 64))
 	out, err := cmd.Output()
 
 	if err != nil{
 		fmt.Printf("Could Not Run Python Script, err: %v", err)
-		return Municipality{}, Court{}
+		return Court{}
 	}
 	log.Printf("Court @ %s", out)
-	delim := ":^)"
-	outArr := strings.Split(string(out), delim)
-	MunicipalityJSON, CourtJSON := []byte(outArr[0]), []byte(outArr[1])
-	mPython := Municipality{}
+
 	cPython := Court{}
 
-	if err = json.Unmarshal(MunicipalityJSON, &mPython); err == nil {
-		mPython.Name = mPython.MUNICIPALITY
-		mPython.Initialized = true
-	}
-	if err = json.Unmarshal(CourtJSON, &cPython); err == nil {
-		if cPython.Address != ""{
+	if err = json.Unmarshal(out, &cPython); err == nil {
+		if cPython.CourtId != 0{
 			cPython.Initialized = true
 		}
 	}
-	return mPython, cPython
+	return cPython
 }
 
 
@@ -68,35 +61,36 @@ func GetCourtByAddress(lat, lon float64) (Municipality, Court){
 
 func RepoFindCourtByAddress(lat, lon float64) Court{
 	//range on an array index, object
-	mPython, cPython := GetCourtByAddress(lat, lon)
-	if !cPython.Initialized || !mPython.Initialized {
-		return Court{}
+	cPython := GetCourtByAddress(lat, lon)
+	if !cPython.Initialized {
+		return DEFAULT_COURT
 	}
 	var matched bool
-	for i, muni := range gMunicipalities {
-		if BareBones(muni.Name) == BareBones(mPython.Name) {
-			matched = true
-			mPython.Id = muni.Id
-			gMunicipalities[i] = mPython
-		}
-	}
-	if (!matched){
-		mPython.Id = len(gMunicipalities) + 1
-		gMunicipalities = append(gMunicipalities, mPython)
-	}
-	cPython.Muni = &mPython
-	matched = false
 	for i, court := range courts {
-		if BareBones(court.Address) == BareBones(cPython.Address) {
+		if court.Id == cPython.CourtId {
 			matched = true
-			cPython.Id = court.Id
-			courts[i] = cPython
+			cPython = courts[i]
 		}
 	}
 	if (!matched){
-		cPython.Id = len(courts) + 1
+		cPython.Id = cPython.CourtId
 		courts = append(courts, cPython)
 	}
+	matched = false
+	for _, muni := range gMunicipalities {
+		if BareBones(muni.Name) == BareBones(cPython.City) {
+			matched = true
+			cPython.Muni = &muni
+		}
+	}
+	if (!matched){
+		gMunicipalityCounter += 1
+		mid := gMunicipalityCounter
+		muni := Municipality{Id: mid, Name: cPython.City, MunicipalCourtWebsite: cPython.WebSite}
+		gMunicipalities = append(gMunicipalities, muni)
+		cPython.Muni = &gMunicipalities[mid]
+	}
+
 	return cPython
 
 }

@@ -7,20 +7,37 @@ import (
 type Court struct{
   Id int                `json:"id"`
   Muni *Municipality   `json:"municipality"`
-  PhoneNumber string    `json:"phone_number"`
+  PhoneNumber string    `json:"phone"`
   OpenTimes string      `json:"open_times"`
   Description string    `json"description"`
   PaymentTypes []string `json:"payment_types"`
 
   //Fields from python object
   Initialized bool //if gotten by python
-  Municipali string //name of Municipality
-	Address string `json:"address"`
+  CourtId int `json:"court_id"`
 	City string `json:"city"`
-	State string `json:"state"`
-	Zip_Code string `json:"zip_code"`
-	Transparen string
-	SymbolID string
+	Address string `json:"address"`
+	County string `json:"county"`
+  State string `json:"state"`
+	ZipCode int `json:"zip_code"`
+  X float64 `json:"x"`
+  Y float64 `json:"y"`
+	Level string `json:"level"`
+  WebSite string `json:"web"`
+}
+
+var DEFAULT_COURT = Court{
+  Id:0,
+  City:"St. Louis",
+  Address:"Multiple Addresses; see website",
+  County:"St. Louis",
+  State:"MO",
+  ZipCode:0,
+  X:-360,
+  Y:-360,
+  Level:"county",
+  PhoneNumber:"(314) 615-8760",
+  WebSite:"http://www.stlouisco.com/LawandPublicSafety/MunicipalCourts/LocationsandHours",
 }
 const(
   COURT_FIELD_NUMS = 7

@@ -9,7 +9,7 @@ import (
 )
 
 var gMunicipalities Municipalities
-
+var gMunicipalityCounter int
 //Load gMunicipalities with info from Municipal Court Website File
 
 func getMunicipalityData() ([][]string, error) {
@@ -39,6 +39,7 @@ func init() {
 	}
 
 	gMunicipalities = make(Municipalities, len(rawCSVdata))
+	gMunicipalityCounter = len(rawCSVdata)
 	var errString = ""
 	for i, line := range rawCSVdata {
 		//skip first line header
