@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+import (
+"fmt"
+"os/exec"
+"strings"
+"encoding/json"
+)
 
 var currentId int
 var courts Courts
@@ -22,37 +27,47 @@ func RepoFindCourt(id int) Court{
   return Court{}
 }
 
-func GetMuncipalityByAddress(lat, lon) (Municipality, Court, error){
+//Id of Court and Municipality will be 0
+func GetCourtByAddress(lat, lon float64) (Municipality, Court){
 
 	cmd := exec.Command("municipal.py")
 	out, err := cmd.Output()
 
 	if err != nil{
-		return Municipality{}, error
+		return Municipality{}, Court{}
 	}
+	delim := ":^)"
+	outArr := strings.Split(string(out), delim)
+	MunicipalityJSON, CourtJSON := []byte(outArr[0]), []byte(outArr[1])
+	mPython := Municipality{}
+	cPython := Court{}
 
-
-	outArr := strings.Split(out, delim)
-	MunicipalityJSON,
-
-
-	//Call Python script
-	//Get Json stuff
+	if err = json.Unmarshal(MunicipalityJSON, &mPython); err == nil {
+		mPython.Name = mPython.MUNICIPALITY
+		mPython.Initialized = true
+	}
+	if err = json.Unmarshal(CourtJSON, &cPython); err == nil {
+		if cPython.Address != ""{
+			cPython.Initialized = true
+		}
+	}
+	return mPython, cPython
 }
 
-func RepoFindMunicipalityByAddress(lat, lon float) Municipality{
+func RepoFindMunicipalityByAddress(lat, lon float64) Municipality{
 	//range on an array index, object
-	mPython, cPython, err := GetMuncipalityByAddress(lat, lon)
+
+	//mPython, cPython := GetCourtByAddress(lat, lon)
 	//check if this data matches municipality object if it doesn't add municipality to lis,
 	//if it does, update it
 	// return empty Ticket if not found
 	return Municipality{}
 }
 
-func RepoFindMunicipality(mId) Municipality{
+func RepoFindMunicipality(mId int) Municipality{
 	//range on an array index, object
   for _, m := range gMunicipalities{
-    if m.Id == id{
+    if m.Id == mId{
       return m
     }
   }
