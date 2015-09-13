@@ -118,7 +118,7 @@ def muniForPoint(x, y):
         else:
             # Log that there was a geometry error, but don't stop iterating immediately;
             # the point could still be in a subsequent municipality and we don't want to miss it.
-            print("ERROR. INVALID GEOMETRY TYPE")
+            # print("ERROR. INVALID GEOMETRY TYPE")
 
     # Return nothing if there's no match.
     return None
@@ -188,17 +188,17 @@ def main():
 ##    y = eval(input())
 
     # Unpack the command-line arguments into lattitude x and longitude y
-    x = float(sys.argv[1])
-    y = float(sys.argv[2])
-    #print x, y
+    x = sys.argv[0]
+    y = sys.argv[1]
+
     # Find the municipality containing a point at lattitude x and longitude y
     muni = muniForPoint(x, y)
-    #print(muni["properties"]["name"])
+
     # Find the court servicing that area. Default to the county court if one cannot be found.
     court = courtForMuni(muni)
 
     # Export the results of the query to the server-side software calling this script via a
     # print() statement
-    print(":^)"+json.dumps(court))
+    print(json.dumps(court))
 
 main()

@@ -36,22 +36,23 @@ func RepoFindCourt(id int) Court{
 //Id of Court and Municipality will be 0
 func GetCourtByAddress(lat, lon float64) (Court){
 
-	cmd := exec.Command("python", "court_locator.py", strconv.FormatFloat(lat, 'g', 1, 64), strconv.FormatFloat(lon, 'g', 1, 64))
+	cmd := exec.Command("python", "court_locator.py", strconv.FormatFloat(lat, 'f', 6, 64), strconv.FormatFloat(lon, 'f', 6, 64))
 	out, err := cmd.Output()
-
+	fmt.Printf("%d, %d", lat, lon)
 	if err != nil{
 		fmt.Printf("Could Not Run Python Script, err: %v", err)
 		return Court{}
 	}
-	log.Printf("Court @ %s", out)
 
 	cPython := Court{}
-
-	if err = json.Unmarshal(out, &cPython); err == nil {
-		if cPython.CourtId != 0{
-			cPython.Initialized = true
-		}
+	log.Printf("Court @ %s", out)
+	outArr := strings.Split(string(out), ":^)")
+	if err = json.Unmarshal([]byte(outArr[1]), &cPython); err == nil {
 	}
+	if cPython.CourtId != 0{
+		cPython.Initialized = true
+	}
+	fmt.Printf("%v", cPython)
 	return cPython
 }
 
