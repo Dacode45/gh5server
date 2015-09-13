@@ -1,0 +1,372 @@
+{
+"service_mappings": [
+  {
+    "municipality":"Ballwin",
+    "servicing_court_id":1
+  },
+  {
+    "municipality":"Bella Villa",
+    "servicing_court_id":2
+  },
+  {
+    "municipality":"Bellefontaine Neighbors",
+    "servicing_court_id":3
+  },
+  {
+    "municipality":"Bellerive",
+    "servicing_court_id":49
+  },
+  {
+    "municipality":"Bel-Nor",
+    "servicing_court_id":4
+  },
+  {
+    "municipality":"Bel-Ridge",
+    "servicing_court_id":5
+  },
+  {
+    "municipality":"Berkeley 1",
+    "servicing_court_id":6
+  },
+  {
+    "municipality":"Berkeley 2",
+    "servicing_court_id":7
+  },
+  {
+    "municipality":"Beverly Hills",
+    "servicing_court_id":8
+  },
+  {
+    "municipality":"Black Jack",
+    "servicing_court_id":9
+  },
+  {
+    "municipality":"Breckenridge Hills",
+    "servicing_court_id":10
+  },
+  {
+    "municipality":"Brentwood",
+    "servicing_court_id":11
+  },
+  {
+    "municipality":"Bridgeton",
+    "servicing_court_id":12
+  },
+  {
+    "municipality":"Calverton Park",
+    "servicing_court_id":13
+  },
+  {
+    "municipality":"Champ",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Charlack",
+    "servicing_court_id":14
+  },
+  {
+    "municipality":"Chesterfield",
+    "servicing_court_id":15
+  },
+  {
+    "municipality":"Clarkson Valley",
+    "servicing_court_id":16
+  },
+  {
+    "municipality":"Clayton",
+    "servicing_court_id":17
+  },
+  {
+    "municipality":"Cool Valley",
+    "servicing_court_id":18
+  },
+  {
+    "municipality":"Country Club Hills",
+    "servicing_court_id":19
+  },
+  {
+    "municipality":"Country Life Acres",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Crestwood",
+    "servicing_court_id":20
+  },
+  {
+    "municipality":"Creve Coeur",
+    "servicing_court_id":21
+  },
+  {
+    "municipality":"Crystal Lake Park",
+    "servicing_court_id":31
+  },
+  {
+    "municipality":"Dellwood",
+    "servicing_court_id":22
+  },
+  {
+    "municipality":"Des Peres",
+    "servicing_court_id":23
+  },
+  {
+    "municipality":"Edmundson",
+    "servicing_court_id":24
+  },
+  {
+    "municipality":"Ellisville",
+    "servicing_court_id":25
+  },
+  {
+    "municipality":"Eureka",
+    "servicing_court_id":26
+  },
+  {
+    "municipality":"Fenton",
+    "servicing_court_id":27
+  },
+  {
+    "municipality":"Ferguson",
+    "servicing_court_id":28
+  },
+  {
+    "municipality":"Flordell Hills",
+    "servicing_court_id":29
+  },
+  {
+    "municipality":"Florissant",
+    "servicing_court_id":30
+  },
+  {
+    "municipality":"Frontenac",
+    "servicing_court_id":31
+  },
+  {
+    "municipality":"Glen Echo Park",
+    "servicing_court_id":49
+  },
+  {
+    "municipality":"Glendale",
+    "servicing_court_id":32
+  },
+  {
+    "municipality":"Grantwood Village",
+    "servicing_court_id":33
+  },
+  {
+    "municipality":"Green Park",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Greendale",
+    "servicing_court_id":34
+  },
+  {
+    "municipality":"Hanley Hills",
+    "servicing_court_id":35
+  },
+  {
+    "municipality":"Hazelwood",
+    "servicing_court_id":36
+  },
+  {
+    "municipality":"Hillsdale",
+    "servicing_court_id":37
+  },
+  {
+    "municipality":"Huntleigh",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Jennings",
+    "servicing_court_id":38
+  },
+  {
+    "municipality":"Kinloch",
+    "servicing_court_id":39
+  },
+  {
+    "municipality":"Kirkwood",
+    "servicing_court_id":40
+  },
+  {
+    "municipality":"Ladue",
+    "servicing_court_id":41
+  },
+  {
+    "municipality":"Lakeshire",
+    "servicing_court_id":42
+  },
+  {
+    "municipality":"Mackenzie",
+    "servicing_court_id":43
+  },
+  {
+    "municipality":"Manchester",
+    "servicing_court_id":44
+  },
+  {
+    "municipality":"Maplewood",
+    "servicing_court_id":45
+  },
+  {
+    "municipality":"Marlborough",
+    "servicing_court_id":46
+  },
+  {
+    "municipality":"Maryland Heights",
+    "servicing_court_id":47
+  },
+  {
+    "municipality":"Moline Acres",
+    "servicing_court_id":48
+  },
+  {
+    "municipality":"Normandy",
+    "servicing_court_id":49
+  },
+  {
+    "municipality":"Northwoods",
+    "servicing_court_id":50
+  },
+  {
+    "municipality":"Norwood Court",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Oakland",
+    "servicing_court_id":51
+  },
+  {
+    "municipality":"Olivette",
+    "servicing_court_id":52
+  },
+  {
+    "municipality":"Overland",
+    "servicing_court_id":53
+  },
+  {
+    "municipality":"Pacific",
+    "servicing_court_id":54
+  },
+  {
+    "municipality":"Pagedale",
+    "servicing_court_id":55
+  },
+  {
+    "municipality":"Pasadena Hills",
+    "servicing_court_id":56
+  },
+  {
+    "municipality":"Pasadena Park",
+    "servicing_court_id":57
+  },
+  {
+    "municipality":"Pine Lawn",
+    "servicing_court_id":58
+  },
+  {
+    "municipality":"Richmond Heights",
+    "servicing_court_id":59
+  },
+  {
+    "municipality":"Riverview",
+    "servicing_court_id":60
+  },
+  {
+    "municipality":"Rock Hill",
+    "servicing_court_id":61
+  },
+  {
+    "municipality":"Shrewsbury",
+    "servicing_court_id":62
+  },
+  {
+    "municipality":"St. Ann",
+    "servicing_court_id":63
+  },
+  {
+    "municipality":"St. John",
+    "servicing_court_id":64
+  },
+  {
+    "municipality":"Sunset Hills",
+    "servicing_court_id":65
+  },
+  {
+    "municipality":"Sycamore Hills",
+    "servicing_court_id":66
+  },
+  {
+    "municipality":"Town and Country",
+    "servicing_court_id":67
+  },
+  {
+    "municipality":"Twin Oaks",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Unincorporated",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"University City",
+    "servicing_court_id":68
+  },
+  {
+    "municipality":"Uplands Park",
+    "servicing_court_id":69
+  },
+  {
+    "municipality":"Valley Park",
+    "servicing_court_id":70
+  },
+  {
+    "municipality":"Velda City",
+    "servicing_court_id":71
+  },
+  {
+    "municipality":"Velda Village Hills",
+    "servicing_court_id":72
+  },
+  {
+    "municipality":"Vinita Park",
+    "servicing_court_id":73
+  },
+  {
+    "municipality":"Vinita Terrace",
+    "servicing_court_id":74
+  },
+  {
+    "municipality":"Warson Woods",
+    "servicing_court_id":75
+  },
+  {
+    "municipality":"Webster Groves",
+    "servicing_court_id":76
+  },
+  {
+    "municipality":"Wellston",
+    "servicing_court_id":77
+  },
+  {
+    "municipality":"Westwood",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Wilbur Park",
+    "servicing_court_id":0
+  },
+  {
+    "municipality":"Wildwood",
+    "servicing_court_id":78
+  },
+  {
+    "municipality":"Winchester",
+    "servicing_court_id":79
+  },
+  {
+    "municipality":"Woodson Terrace",
+    "servicing_court_id":80
+  }
+]
+}
