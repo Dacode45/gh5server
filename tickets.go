@@ -112,6 +112,7 @@ func loadViolations() error {
   return nil
 }
 func loadCitations() error {
+  //TODO: Use a more efficient data structure later
   var err error
   csvfile, err := os.Open("citations.csv")
   if err != nil {
