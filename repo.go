@@ -99,7 +99,7 @@ func RepoFindCourtByAddress(lat, lon float64) Court{
 
 }
 
-func RepoFindTicketByDriverLicenseNumber (driver_license_number string) Ticket{
+func RepoFindTicketByDriverLicenseNumber(driver_license_number string) Ticket{
 	//TODO: Handlers should really get things from global arrays. Create a function in repo.go that returns a ticket from drivers license
 	for _, tic := range gTickets {
 		if tic.DriverLicenseNumber == driver_license_number {
