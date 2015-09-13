@@ -144,8 +144,8 @@ func loadCitations() error {
         gTickets[i].DefendantState = record[8]
         gTickets[i].DriverLicenseNumber = record[9]
         gTickets[i].CourtDate, err = time.Parse("1/2/2006 15:04", record[10])
-        gTickets[i].CourtLocation = record[11]
-        gTickets[i].CourtAddress = record[12]
+        court, _ := RepoCreateCourt(Court{Address: record[12], City: record[11]})
+        gTickets[i].Court = &court
       }
     }
   }

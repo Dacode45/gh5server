@@ -48,8 +48,7 @@ type Ticket struct{
   DefendantState string `json:defendant_state`
   DriverLicenseNumber string `json:driver_license_number`
   CourtDate time.Time `json:court_date`
-  CourtLocation string `json:court_location`
-  CourtAddress string `json:court_address`
+  Court *Court `json:court`
 }
 
 /*type TicketInfo struct{
