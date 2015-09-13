@@ -61,6 +61,12 @@ var routes = Routes{
 		TicketIndex,
 	},
 	Route{
+		"TicketShow",
+		"GET",
+		"/tickets/{ticketId}",
+		TicketShow,
+	},
+	Route{
 		"TicketCreate",
 		"CREATE",
 		"/tickets",

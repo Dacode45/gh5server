@@ -213,10 +213,36 @@ func CourtShow(w http.ResponseWriter, r *http.Request) {
 
 //handlers for Ticket
 func TicketIndex(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	w.WriteHeader(http.StatusOK)
-	if err := json.NewEncoder(w).Encode(gTickets); err != nil {
-		panic(err)
+	params := r.URL.Query()
+	driver_licenses, ok := params["driver_license"]
+	if ok {
+		driver_license := string(driver_licenses[0])
+		var found bool = false
+		for _, tic := range gTickets {
+			if tic.DriverLicenseNumber == driver_license {
+				found = true
+				w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+				w.WriteHeader(http.StatusOK)
+				if err := json.NewEncoder(w).Encode(tic); err != nil {
+					panic(err)
+				}
+				break
+			}
+		}
+		if (!found){
+			w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+			w.WriteHeader(http.StatusNotFound)
+			if err := json.NewEncoder(w).Encode(jsonErr{Code: http.StatusNotFound, Text: "Not Found"}); err != nil {
+				panic(err)
+			}
+		}
+		return
+	} else {
+		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+		w.WriteHeader(http.StatusOK)
+		if err := json.NewEncoder(w).Encode(gTickets); err != nil {
+			panic(err)
+		}
 	}
 }
 
