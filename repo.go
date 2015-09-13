@@ -16,6 +16,10 @@ func init() {
 	  RepoCreateCourt(Court{})
 }
 
+//Takes In String returns one with all whitespace replaced and lower case
+func BareBones(str string) string{
+		return strings.ToLower(strings.Replace(str, " ", "", -1))
+}
 //Repo Court
 func RepoFindCourt(id int) Court{
   //range on an array index, object
@@ -35,6 +39,7 @@ func GetCourtByAddress(lat, lon float64) (Municipality, Court){
 	out, err := cmd.Output()
 
 	if err != nil{
+		fmt.Printf("Could Not Run Python Script, err: %v", err)
 		return Municipality{}, Court{}
 	}
 	delim := ":^)"
@@ -62,12 +67,12 @@ func GetCourtByAddress(lat, lon float64) (Municipality, Court){
 func RepoFindCourtByAddress(lat, lon float64) Court{
 	//range on an array index, object
 	mPython, cPython := GetCourtByAddress(lat, lon)
-	if cPython.Initialized {
+	if !cPython.Initialized || !mPython.Initialized {
 		return Court{}
 	}
-	var matched bool = false
+	var matched bool
 	for i, muni := range gMunicipalities {
-		if muni.Name == mPython.Name {
+		if BareBones(muni.Name) == BareBones(mPython.Name) {
 			matched = true
 			mPython.Id = muni.Id
 			gMunicipalities[i] = mPython
@@ -80,7 +85,7 @@ func RepoFindCourtByAddress(lat, lon float64) Court{
 	cPython.Muni = &mPython
 	matched = false
 	for i, court := range courts {
-		if court.Address == cPython.Address {
+		if BareBones(court.Address) == BareBones(cPython.Address) {
 			matched = true
 			cPython.Id = court.Id
 			courts[i] = cPython

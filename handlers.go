@@ -219,6 +219,7 @@ func TicketIndex(w http.ResponseWriter, r *http.Request) {
 	if ok {
 		driver_license := string(driver_licenses[0])
 		var found bool = false
+		//TODO: Handlers should really get things from global arrays. Create a function in repo.go that returns a ticket from drivers license
 		for _, tic := range gTickets {
 			if tic.DriverLicenseNumber == driver_license {
 				found = true
