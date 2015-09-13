@@ -219,7 +219,7 @@ func TicketIndex(w http.ResponseWriter, r *http.Request) {
 	if ok {
 		driver_license := string(driver_licenses[0])
 		tic := RepoFindTicketByDriverLicenseNumber(driver_license)
-		if tic.Validate() == nil {
+		if tic.Id > 0 {
 			w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 			w.WriteHeader(http.StatusOK)
 			if err := json.NewEncoder(w).Encode(tic); err != nil {
