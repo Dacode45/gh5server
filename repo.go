@@ -2,6 +2,7 @@ package main
 
 import (
 "fmt"
+"log"
 "os/exec"
 "strings"
 "encoding/json"
@@ -35,13 +36,14 @@ func RepoFindCourt(id int) Court{
 //Id of Court and Municipality will be 0
 func GetCourtByAddress(lat, lon float64) (Municipality, Court){
 
-	cmd := exec.Command("python", "python/court_locator.py", strconv.FormatFloat(lat, 'g', 1, 64), strconv.FormatFloat(lon, 'g', 1, 64))
+	cmd := exec.Command("python", "court_locator.py", strconv.FormatFloat(lat, 'g', 1, 64), strconv.FormatFloat(lon, 'g', 1, 64))
 	out, err := cmd.Output()
 
 	if err != nil{
 		fmt.Printf("Could Not Run Python Script, err: %v", err)
 		return Municipality{}, Court{}
 	}
+	log.Printf("Court @ %s", out)
 	delim := ":^)"
 	outArr := strings.Split(string(out), delim)
 	MunicipalityJSON, CourtJSON := []byte(outArr[0]), []byte(outArr[1])
