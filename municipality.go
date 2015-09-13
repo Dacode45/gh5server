@@ -45,8 +45,13 @@ type Municipality struct {
 	OrderSeen             string `json:"order_seen"`
 	DirectionsListed      bool   `json:"directions_listed"`
 	Initialized bool `json:"initialized"`
+	//Stuff frmo python
+	OBJECTID int
+	MUNICIPALITY string
+	MUNI string
+	MUNICODE int
 
-	//
+
 }
 
 type Municipalities []Municipality

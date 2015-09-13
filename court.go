@@ -6,12 +6,21 @@ import (
 
 type Court struct{
   Id int                `json:"id"`
-  Address string        `json:"address"`
   Muni *Municipality   `json:"municipality"`
   PhoneNumber string    `json:"phone_number"`
   OpenTimes string      `json:"open_times"`
   Description string    `json"description"`
   PaymentTypes []string `json:"payment_types"`
+
+  //Fields from python object
+  Initialized bool //if gotten by python
+  Municipali string //name of Municipality
+	Address string `json:"address"`
+	City string `json:"city"`
+	State string `json:"state"`
+	Zip_Code string `json:"zip_code"`
+	Transparen string
+	SymbolID string
 }
 const(
   COURT_FIELD_NUMS = 7
@@ -32,7 +41,7 @@ func (c *Court) Validate () error{
   if len(c.Address) == 0{
     errors = append(errors, ERROR_MISSING_Address)
   }
-  if c.Muni.Id > 0{
+  if c.Muni != nil{
     errors = append(errors, ERROR_MISSING_Municipality)
   }
   if len(c.PhoneNumber) == 0{

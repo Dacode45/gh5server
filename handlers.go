@@ -18,15 +18,18 @@ func Index(w http.ResponseWriter, r *http.Request) {
 //handlers for municipality
 func MunicipalIndex(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
+	var lat float64
+	var lon float64
+	var err error
 
-	if lat, err :=  strconv.ParseFloat(vars["lat"]); err != nil{
+	if lat, err =  strconv.ParseFloat(vars["lat"], 64); err != nil{
 		panic(err)
 	}
-	if lon, err := strconv.ParseFloat(vars["lon"]); err != nil{
+	if lon, err = strconv.ParseFloat(vars["lon"], 64); err != nil{
 		panic(err)
 	}
 
-	m := RepoFindMunicipalityByAddress(lat, lon)
+	m := RepoFindCourtByAddress(lat, lon)
 	if m.Id > 0 {
 		w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 		w.WriteHeader(http.StatusOK)

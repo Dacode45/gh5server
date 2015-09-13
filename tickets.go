@@ -58,8 +58,8 @@ func loadViolations() error {
       continue
     }
     var tempTicket = Ticket{}
-    tempTicket.Id = ticketId
-    ticketId += 1
+    tempTicket.Id = gTicketId
+    gTicketId += 1
     if tempTicket.CitationNumber,err  = strconv.Atoi(record[1]); err != nil{
       return fmt.Errorf("Failed to read citation number: %v", err)
     }
