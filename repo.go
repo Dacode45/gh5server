@@ -5,6 +5,7 @@ import (
 "os/exec"
 "strings"
 "encoding/json"
+"strconv"
 )
 
 var gCourtId int
@@ -30,7 +31,7 @@ func RepoFindCourt(id int) Court{
 //Id of Court and Municipality will be 0
 func GetCourtByAddress(lat, lon float64) (Municipality, Court){
 
-	cmd := exec.Command("municipal.py")
+	cmd := exec.Command("python", "python/court_locator.py", strconv.FormatFloat(lat, 'g', 1, 64), strconv.FormatFloat(lon, 'g', 1, 64))
 	out, err := cmd.Output()
 
 	if err != nil{

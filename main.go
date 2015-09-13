@@ -31,7 +31,8 @@ func main() {
 	})
 
 	router := NewRouter()
-
-	log.Fatal(http.ListenAndServe("0.0.0.0:8080", router))
+	fs := http.FileServer(http.Dir("static"))
+	http.Handle("/static", fs)
+	log.Fatal(http.ListenAndServe("0.0.0.0:3000", router))
 
 }
