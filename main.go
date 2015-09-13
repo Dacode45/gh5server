@@ -29,7 +29,6 @@ func main() {
 			panic(err)
 		}
 	})
-
 	router := NewRouter()
 	log.Fatal(http.ListenAndServe("0.0.0.0:3000", router))
 
